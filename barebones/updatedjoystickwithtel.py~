@@ -1,7 +1,7 @@
 #to run, 'sudo python' then 'import gamepad' (this file), then 'gamepad.test()'
 #to install pygame: apt-get install python-pygame
 
-import pygame, time, serial, csv, motor_func, math
+import pygame, time, serial, csv, math
 
 pygame.init()
 j = pygame.joystick.Joystick(0)
@@ -59,9 +59,9 @@ def test():
 	while True:
 		time.sleep(float(output_delay))
 		joystick_info = get()
-		print (joystick_info)
+		print (str(joystick_info).replace('[','').replace(']',''))
 
-		ser.write(str(joystick_info))
+		ser.write(str(joystick_info)+'\n')
 if __name__ == '__main__':
     test()
 

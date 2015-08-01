@@ -32,7 +32,7 @@ def readgps():
     while True:
         line = ser_tel.readline()
 	#print line
-        if "GPGSV" in line and "," not in line[18:27] and "," not in line[30:40]:
+        if "GPGGA" in line and "," not in line[18:27] and "," not in line[30:40]:
             latitude = line[18:27] #Yes it is positional info for lattitude 3000
             longitude = line[30:40] #do it again 11100
             return(float(longitude), float(latitude))

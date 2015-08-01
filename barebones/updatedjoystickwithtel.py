@@ -59,9 +59,9 @@ def test():
 	while True:
 		time.sleep(float(output_delay))
 		joystick_info = get()
-		print (joystick_info)
+		print (str(joystick_info).replace('[','').replace(']',''))
 
-		ser.write(str(joystick_info))
+		ser.write(str(joystick_info).replace('[','').replace(']','')+'\n')
 if __name__ == '__main__':
     test()
 
