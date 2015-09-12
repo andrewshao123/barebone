@@ -1,7 +1,7 @@
 #to run, 'sudo python' then 'import gamepad' (this file), then 'gamepad.test()'
 #to install pygame: apt-get install python-pygame
 
-import pygame, time, serial, csv, math
+import pygame, time, serial, csv, motor_func, math
 
 pygame.init()
 j = pygame.joystick.Joystick(0)
@@ -11,7 +11,7 @@ j.init()
 #output_ser_path = raw_input("Please enter your serial port number: ")
 
 output_delay = 0.1
-ser = serial.Serial('/dev/ttyUSB0',115200,timeout = 1)
+ser = serial.Serial('/dev/ttyUSB0',9600,timeout = 1)
 """
 for i in range(10):
     try:
@@ -59,9 +59,14 @@ def test():
 	while True:
 		time.sleep(float(output_delay))
 		joystick_info = get()
-		print (str(joystick_info).replace('[','').replace(']',''))
+		print (joystick_info)
 
-		ser.write(str(joystick_info).replace('[','').replace(']','')+'\n')
+		ser.write(str(joystick_info))
+		#def motor_move(motor, speed_fb,speed_lr,ser)
+		motor_func.motor_move(1,joystick_info[1]*0.5*(joystick_info[3] + 1),joystick_info[0]*0.5*(joystick_info[3] + 1),joystick_info[2]*0.5*(joystick_info[3] + 1),ser)
+		print(joystick_info[1]*0.5*(joystick_info[3] + 1))
+		motor_func.motor_move(2,joystick_info[1]*0.5*(joystick_info[3] + 1),joystick_info[0]*0.5*(joystick_info[3] + 1),joystick_info[2]*0.5*(joystick_info[3] + 1),ser)
+
 if __name__ == '__main__':
     test()
 
